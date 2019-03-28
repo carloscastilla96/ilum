@@ -9,14 +9,6 @@ class Filters extends Component{
         super(props);
 
         store.getCategories();
-        store.getCategories();
-        store.getCategories();
-        store.getCategories();
-        store.getCategories();
-        
-        setTimeout(() => {
-            store.getCategories();
-        }, 2000);
     }
 
     render(){

@@ -12,6 +12,7 @@ class Store {
 
     @observable categories: catsArray|null|false = null;
 
+    @observable currentDept: number|null = null;
 
     getDepartments(){
         if(this.loadingDeps || this.departments) return;
@@ -29,7 +30,7 @@ class Store {
             console.log('departamentos cargados', result);
             //this.departments.set(result);
             
-            localStorage.setItem('departments', JSON.stringify(toJS(store.departments)));
+            localStorage.setItem('departments', JSON.stringify(toJS(result)));
             localStorage.setItem('departments_time', Date.now() + '');
 
             this.departments = result;
@@ -43,7 +44,7 @@ class Store {
 
         this.categories = false;
         api.getCategories((result: catsArray) => {
-            //console.log('categorías cargadas', result);
+            console.log('categorías cargadas', result);
             this.categories = result;
         });
     }
