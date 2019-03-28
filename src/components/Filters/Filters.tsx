@@ -17,8 +17,9 @@ class Filters extends Component{
             <h3>{store.departments ? 'Departments' : 'Loading Departments...'}</h3>
             <DepartmentsMenu />
 
-            <h3>{store.categories ? 'Categories' : 'Loading Categories...'}</h3>
+            {store.currentDept !== null && <h3>{store.categories ? 'Categories' : 'Loading Categories...'}</h3>}
             {store.categories && store.categories.map(( cat ) => {
+                if(cat.department_id != store.currentDept) return null;
                 return <a key={cat.category_id} 
                     href={`/department/${cat.name}`}>
                     {cat.name}

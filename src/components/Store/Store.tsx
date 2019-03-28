@@ -10,7 +10,6 @@ class Store extends Component{
             <Filters />
             <Filters />
 
-
             <p>productos</p>
         </div>
     }

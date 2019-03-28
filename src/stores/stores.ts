@@ -3,7 +3,7 @@ import { observable, autorun, toJS } from 'mobx';
 import api from '../utils/api';
 
 export type depsArray = { name: string, department_id: number }[];
-export type catsArray = { name: string, category_id: number, deparment_id: number }[];
+export type catsArray = { name: string, category_id: number, department_id: number }[];
 
 class Store {
 
