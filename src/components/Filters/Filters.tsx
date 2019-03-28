@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import store from '../../stores/stores';
 import { observer } from 'mobx-react';
+import DepartmentsMenu from '../DepartmentsMenu/DepartmentsMenu';
 
 @observer
 class Filters extends Component{
@@ -14,12 +15,7 @@ class Filters extends Component{
     render(){
         return <div>
             <h3>{store.departments ? 'Departments' : 'Loading Departments...'}</h3>
-            {store.departments && store.departments.map(( dep ) => {
-                return <a key={dep.department_id} 
-                    href={`/department/${dep.name}`}>
-                    {dep.name}
-                </a>;
-            })}
+            <DepartmentsMenu />
 
             <h3>{store.categories ? 'Categories' : 'Loading Categories...'}</h3>
             {store.categories && store.categories.map(( cat ) => {
@@ -28,10 +24,6 @@ class Filters extends Component{
                     {cat.name}
                 </a>;
             })}
-
-            {/*<button onClick={store.onAdd}>
-                Ver más
-            </button>*/}
         </div>
     }
 }
