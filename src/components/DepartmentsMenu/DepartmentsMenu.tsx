@@ -5,7 +5,7 @@ import store from '../../stores/stores';
 
 const DepartmentsMenu = () => {
     var handleClick = (id: number) => {
-        store.currentDept = id;
+        store.setDepartment(id);
     }
 
     return <div>

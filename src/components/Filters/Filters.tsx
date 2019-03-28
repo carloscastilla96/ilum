@@ -14,16 +14,20 @@ class Filters extends Component{
 
     render(){
         return <div>
+            <p>{store.pageTitle}</p>
             <h3>{store.departments ? 'Departments' : 'Loading Departments...'}</h3>
             <DepartmentsMenu />
 
-            {store.currentDept !== null && <h3>{store.categories ? 'Categories' : 'Loading Categories...'}</h3>}
+            {store.currentDept != null && <h3>{store.categories ? 'Categories' : 'Loading Categories...'}</h3>}
             {store.categories && store.categories.map(( cat ) => {
                 if(cat.department_id != store.currentDept) return null;
-                return <a key={cat.category_id} 
-                    href={`/department/${cat.name}`}>
+                return <button key={cat.category_id} 
+                    onClick={() => {
+                        store.setCategory(cat.category_id);
+                    }}
+                    style={{ background: store.currentCat == cat.category_id ? 'gray' : 'white' }}>
                     {cat.name}
-                </a>;
+                </button>;
             })}
         </div>
     }

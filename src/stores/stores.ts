@@ -1,4 +1,4 @@
-import { observable, autorun, toJS } from 'mobx';
+import { observable, autorun, toJS, configure, action, computed } from 'mobx';
 
 import api from '../utils/api';
 
@@ -13,8 +13,17 @@ class Store {
     @observable categories: catsArray|null|false = null;
 
     @observable currentDept: number|null = null;
+    @observable currentCat: number|null = null;
 
-    getDepartments(){
+    @computed get pageTitle(){
+        var dep = this.departments && this.departments.find(e => e.department_id == this.currentDept);
+        var cat = this.categories && this.categories.find(e => e.category_id == this.currentCat);
+
+        var res = `${dep ? dep.name : ''} ${cat ? ' - ' + cat.name : ''}`;
+        return res;
+    }
+
+    @action getDepartments(){
         if(this.loadingDeps || this.departments) return;
 
         var depsLocal = localStorage.getItem('departments');
@@ -36,13 +45,22 @@ class Store {
         api.getDepartments(callback);
     }
 
-    getCategories(){
+    @action setDepartment(id: number){
+        this.currentDept = id;
+        this.currentCat = null;
+    }
+
+    @action getCategories(){
         if(this.categories != null) return;
 
         this.categories = false;
         api.getCategories((result: catsArray) => {
             this.categories = result;
         });
+    }
+
+    @action setCategory(id: number){
+        this.currentCat = id;
     }
 }
 

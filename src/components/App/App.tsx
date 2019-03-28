@@ -6,6 +6,7 @@ import Store from '../Store/Store';
 
 import api from '../../utils/api';
 import store from '../../stores/stores';
+import { observer } from 'mobx-react';
 
 class App extends Component {
 
@@ -16,8 +17,12 @@ class App extends Component {
   }
 
   render() {
+    
+    
+
     return (
       <div className="App">
+        <h1>{ store.pageTitle }</h1>
       
         <NavBar />
 
@@ -28,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default observer(App);
