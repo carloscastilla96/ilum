@@ -26,10 +26,7 @@ class Store {
         }
 
         this.loadingDeps = true;
-        var callback = (result: depsArray) => {
-            console.log('departamentos cargados', result);
-            //this.departments.set(result);
-            
+        var callback = (result: depsArray) => {            
             localStorage.setItem('departments', JSON.stringify(toJS(result)));
             localStorage.setItem('departments_time', Date.now() + '');
 
@@ -44,18 +41,11 @@ class Store {
 
         this.categories = false;
         api.getCategories((result: catsArray) => {
-            console.log('categorías cargadas', result);
             this.categories = result;
         });
     }
 }
 
 const store = new Store();
-
-autorun(( ) => {
-    
-    
-});
-
 
 export default store;
