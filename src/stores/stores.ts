@@ -1,9 +1,15 @@
 import { observable, autorun, toJS, configure, action, computed } from 'mobx';
+import firebase from 'firebase';
+
+import credentials from '../firebaseCredentials';
+firebase.initializeApp(credentials);
 
 import api from '../utils/api';
 
 export type depsArray = { name: string, department_id: number }[];
 export type catsArray = { name: string, category_id: number, department_id: number }[];
+
+
 
 class Store {
 
@@ -61,6 +67,14 @@ class Store {
 
     @action setCategory(id: number){
         this.currentCat = id;
+    }
+
+    uploadFile(fileName: string, fileContent: string){
+        let storage = firebase.storage().ref();
+        let file = storage.child('gatos/'+fileName);
+        file.putString(fileContent, 'data_url').then(function(snapshot) {
+            console.log('Uploaded a base64url string!');
+        });
     }
 }
 
